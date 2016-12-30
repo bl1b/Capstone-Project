@@ -6,7 +6,7 @@ The project is completely designed, planned and executed by me.
 This is a library collecting various sources of company-related public information (like RSS-Feeds,
 Facebook-Page, YouTube-Channel, Twitter-Account, etc.) and displays them in a user-friendly way.
 
-For more detailed information see: [Project Documentation](./Captstone_Stage1.pdf).
+For more detailed information see: [Project Documentation](./Capstone_Stage1.pdf).
 
 ## Copyright
 The project is copyrighted to Jan Grünewald ([jan.gruenewald84@googlemail.com](mailto:jan.gruenewald84@googlemail.com)).
