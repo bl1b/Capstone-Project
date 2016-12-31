@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Class LogHelperTest.
- * TODO: Add Description
+ * This classes tests the LogHelper functionalities.
  *
  * @author Jan Grünewald (2016)
  * @version 1.0.0
