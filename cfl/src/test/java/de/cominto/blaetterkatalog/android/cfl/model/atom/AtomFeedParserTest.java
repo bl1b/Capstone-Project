@@ -13,8 +13,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.simpleframework.xml.core.ValueRequiredException;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -247,10 +248,10 @@ public class AtomFeedParserTest {
         return feedService.fetchFeed();
     }
 
-    private String getFileContentAsString(String filename) throws IOException {
-        BufferedInputStream in = new BufferedInputStream(this.getClass().getResourceAsStream(filename));
+    private String getFileContentAsString(String filename) throws Exception {
+        BufferedReader in = new BufferedReader(new InputStreamReader(this.getClass().getResourceAsStream(filename), "UTF-8"));
 
-        byte[] buffer = new byte[1024];
+        char[] buffer = new char[1024];
         int bytesRead;
 
         String fileContent = "";
