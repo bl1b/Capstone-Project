@@ -7,6 +7,7 @@
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
 import okhttp3.HttpUrl;
+import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
@@ -21,7 +22,7 @@ public class AtomFeedHelper {
 
     public static Retrofit retrofitWithBaseUrl(String baseUrl) {
         return new Retrofit.Builder()
-                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .addConverterFactory(createAtomConverterFactory())
                 .baseUrl(baseUrl)
                 .validateEagerly(true)
                 .build();
@@ -29,8 +30,12 @@ public class AtomFeedHelper {
 
     public static Retrofit retrofitWithBaseUrl(HttpUrl baseUrl) {
         return new Retrofit.Builder()
-                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .addConverterFactory(createAtomConverterFactory())
                 .baseUrl(baseUrl)
                 .build();
+    }
+
+    private static Converter.Factory createAtomConverterFactory() {
+        return SimpleXmlConverterFactory.create();
     }
 }

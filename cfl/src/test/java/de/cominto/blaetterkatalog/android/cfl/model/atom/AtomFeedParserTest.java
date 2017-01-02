@@ -15,6 +15,9 @@ import org.simpleframework.xml.core.ValueRequiredException;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
@@ -27,6 +30,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.hamcrest.Matchers.isEmptyOrNullString;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.fail;
@@ -98,7 +103,13 @@ public class AtomFeedParserTest {
         assertThat("Parsed id not correct.", atomFeed.getId(), equalTo("tag:news.google.de,2016-12-31:/1/de/de/1483184185317"));
         assertThat("Parsed title not correct.", atomFeed.getTitle().getText(), equalTo("Google News: Schlagzeilen"));
         assertThat("Right could not be parsed.", atomFeed.getRights().getText(), equalTo("&copy;2016 Google"));
-        assertThat("Update-Date could not be parsed.", atomFeed.getUpdated(), equalTo("2016-12-31T10:03:35Z"));
+
+        Calendar myCalendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+        myCalendar.set(2016, 11, 31, 10, 3, 35);
+        myCalendar.set(Calendar.MILLISECOND, 0);
+
+        // 2016-12-31T10:03:35Z -> test if conversion to long will work
+        assertThat("Update-Date could not be parsed.", atomFeed.getUpdated().getTime(), equalTo(myCalendar.getTime().getTime()));
 
         // check if links could be parsed
         assertThat("Number of links wrong.", atomFeed.getLinks().size(), equalTo(2));
@@ -141,6 +152,27 @@ public class AtomFeedParserTest {
         assertThat("Content could not be parsed", testEntry.getContent().getText(), equalTo("<table border=\"0\" cellpadding=\"2\" cellspacing=\"7\" style=\"vertical-align:top;\"><tr><td width=\"80\" align=\"center\" valign=\"top\"><font style=\"font-size:85%;font-family:arial,sans-serif\"><a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNGVWQB0E7YzlC6sdD0Pvly46dvwIw&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.bild.de/regional/bremen/tamme-hanken/witwe-carmen-verunfallt-mit-pferdeanhaenger-49545358.bild.html\"><img src=\"//t2.gstatic.com/images?q=tbn:ANd9GcScQWbX_c9oRGNE_lLbGWivGp_iYp8op78BXxeFdM3_6UixwF9SQidRhx1rPoV6n1v5nRvzHIwi\" alt=\"\" border=\"1\" width=\"80\" height=\"80\"><br><font size=\"-2\">BILD</font></a></font></td><td valign=\"top\" class=\"j\"><font style=\"font-size:85%;font-family:arial,sans-serif\"><br><div style=\"padding-top:0.8em;\"><img alt=\"\" height=\"1\" width=\"1\"></div><div class=\"lh\"><a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNGVWQB0E7YzlC6sdD0Pvly46dvwIw&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.bild.de/regional/bremen/tamme-hanken/witwe-carmen-verunfallt-mit-pferdeanhaenger-49545358.bild.html\"><b>KNAPP 3 MONATE NACH DEM TOD DES XXL-OSTFRIESEN | Hanken-Witwe kracht mit <b>...</b></b></a><br><font size=\"-1\"><b><font color=\"#6f6f6f\">BILD</font></b></font><br><font size=\"-1\">Eine unerwartete Tragödie riss Carmen Hanken (56) aus dem gewohnten Leben – jetzt ein weiterer Schicksalsschlag für die Familie des XXL-Ostfriesen Tamme Hanken († 56). Jemgum (Niedersachsen) – Am Samstagmorgen krachte die Witwe mit einem&nbsp;...</font><br><font size=\"-1\"><a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNErGWuGP2KtBo-6fuvASKK7ZIiydw&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.gala.de/stars/news/carmen-hanken-verkehrsunfall-mit-totalschaden_1589016.html\">Carmen Hanken: Verkehrsunfall mit Totalschaden</a><font size=\"-1\" color=\"#6f6f6f\"><nobr>Gala.de</nobr></font></font><br><font size=\"-1\"><a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNE3JQtwRkpxtv3EP0CmvovXEOE2fg&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.derwesten.de/panorama/tamme-hankens-witwe-nach-unfall-in-krankenhaus-gebracht-id209133875.html\">Kollision: Schwerer Verkehrsunfall mit dem Pferdetransporter - Tamme Hankens <b>...</b></a><font size=\"-1\" color=\"#6f6f6f\"><nobr>Derwesten.de</nobr></font></font><br><font size=\"-1\"><a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNFf7gkfAPYV2VFq8o49BpKQqV3F4Q&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.noz.de/deutschland-welt/niedersachsen/artikel/828800/witwe-des-xxl-ostfriesen-tamme-hanken-bei-unfall-verletzt\">Witwe des XXL-Ostfriesen Tamme Hanken bei Unfall verletzt</a><font size=\"-1\" color=\"#6f6f6f\"><nobr>NOZ - Neue Osnabrücker Zeitung</nobr></font></font><br><font size=\"-1\" class=\"p\"><a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNHVynIng31WMF9q79EM7t7iNxrddQ&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=https://www.merkur.de/tv/tamme-hankens-witwe-carmen-faehrt-mit-pferdetransporter-gegen-baum-7183689.html\"><nobr>Merkur.de</nobr></a>&nbsp;-<a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNGpvl4adyAYXEw-aq41aFm41tpnVg&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.huffingtonpost.de/2016/12/31/carmen-hanken-unfall_n_13908620.html\"><nobr>Huffington Post Deutschland</nobr></a>&nbsp;-<a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNEf8XSRh_dvu69yjnRry_BHpBRSrQ&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.nwzonline.de/blaulicht/witwe-von-xxl-ostfriese-tamme-hanken-bei-unfall-verletzt_a_31,2,580215013.html\"><nobr>Nordwest-Zeitung</nobr></a>&nbsp;-<a href=\"http://news.google.com/news/url?sa=t&amp;fd=R&amp;ct2=de&amp;usg=AFQjCNEE4_VszweBGjKrCL9-qqbcDgmGLw&amp;clid=c3a7d30bb8a4878e06b80cf16b898331&amp;cid=52780198972940&amp;ei=OZhnWLC6EeGA6ATnqK2QDw&amp;url=http://www.tvmovie.de/news/tamme-hankens-witwe-carmen-schwerer-unfall-mit-pferdetransporter-91401\"><nobr>TV Movie</nobr></a></font><br><font class=\"p\" size=\"-1\"><a class=\"p\" href=\"http://news.google.de/news/story?ncl=drq3Vwuwekb0GTMAHzZtF9mpLgilM&amp;ned=de&amp;topic=h\"><nobr><b>Alle 17 Artikel&nbsp;&raquo;</b></nobr></a></font></div></font></td></tr></table>"));
 
         mockWebServer.takeRequest();
+    }
+
+    @Test
+    public void testJsonSerialization() throws Exception {
+        MockResponse mockResponse = new MockResponse()
+                .setResponseCode(200)
+                .setBody(getFileContentAsString("/google_feed.xml"));
+
+        mockWebServer.enqueue(mockResponse);
+
+        // setup the service we want to test
+        Call<AtomFeed> serviceCall = createAtomFeedCall("/google_feed/");
+
+        Response<AtomFeed> response = serviceCall.execute();
+        assertThat("Service call could not be executed.", response, notNullValue());
+        assertThat("Response should show succesful", response.isSuccessful(), equalTo(true));
+
+        AtomFeed atomFeed = response.body();
+        assertThat("Feed should not be null", atomFeed, notNullValue());
+
+        assertThat(atomFeed.asJSON(), not(isEmptyOrNullString()));
     }
 
     @Test

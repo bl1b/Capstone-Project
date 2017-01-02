@@ -6,12 +6,21 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import de.cominto.blaetterkatalog.android.util.DateUtil;
 
 /**
  * Class AtomFeed.
@@ -22,6 +31,7 @@ import java.util.List;
  */
 @Root(name = "feed", strict = false)
 public class AtomFeed {
+
     @Element(name = "id")
     private String id;
 
@@ -66,8 +76,17 @@ public class AtomFeed {
         return title;
     }
 
-    public String getUpdated() {
-        return updated;
+    public Date getUpdated() {
+        Date updatedDate;
+
+        try {
+            updatedDate = DateUtil.parseRFC3339Date(updated);
+        } catch (ParseException e) {
+            Log.e("AtomFeedParser", "Failed parsing RFC 3339-Date from " + updated);
+            updatedDate = new Date(System.currentTimeMillis());
+        }
+
+        return updatedDate;
     }
 
     public List<AtomFeedEntry> getEntries() {
@@ -104,5 +123,12 @@ public class AtomFeed {
 
     public String getSubtitle() {
         return subtitle;
+    }
+
+    public String asJSON() {
+        Gson gson = new GsonBuilder()
+                .create();
+
+        return gson.toJson(this);
     }
 }

@@ -44,6 +44,7 @@ dependencies {
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
+    compile 'com.google.code.gson:gson:2.8.0'
 
     // dependencies for integration tests
     testCompile(group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '3.5.0')
