@@ -9,7 +9,7 @@ package de.cominto.blaetterkatalog.android.cfl.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 
 /**
  * Class CFLDataSourceEntryProvider.
@@ -19,11 +19,11 @@ import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
  * @version 1.0.0
  */
 public interface CFLDataSourceEntryProvider {
-    List<CFLDataSourceEntry> getDataSourceEntries();
+    List<DataSourceEntry> getDataSourceEntries();
 
     CFLDataSourceEntryProvider EMPTY = new CFLDataSourceEntryProvider() {
         @Override
-        public List<CFLDataSourceEntry> getDataSourceEntries() {
+        public List<DataSourceEntry> getDataSourceEntries() {
             return new ArrayList<>(0);
         }
     };

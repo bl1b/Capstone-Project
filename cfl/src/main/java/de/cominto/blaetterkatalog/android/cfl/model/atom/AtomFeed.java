@@ -6,6 +6,7 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
 import de.cominto.blaetterkatalog.android.util.DateUtil;
 import timber.log.Timber;
@@ -124,8 +124,8 @@ public class AtomFeed implements CFLDataSourceEntryProvider {
     }
 
     @Override
-    public List<CFLDataSourceEntry> getDataSourceEntries() {
-        List<CFLDataSourceEntry> dataSourceEntries = new ArrayList<>(entries.size());
+    public List<DataSourceEntry> getDataSourceEntries() {
+        List<DataSourceEntry> dataSourceEntries = new ArrayList<>(entries.size());
         dataSourceEntries.addAll(entries);
         return dataSourceEntries;
     }

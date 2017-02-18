@@ -25,7 +25,7 @@ import de.cominto.blaetterkatalog.android.cfl.CFL;
 import de.cominto.blaetterkatalog.android.cfl.CFLConfiguration;
 import de.cominto.blaetterkatalog.android.cfl.R;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.OverviewDisplayItemProvider;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLSection;
@@ -106,9 +106,9 @@ public class OverviewActivity extends AppCompatActivity implements OverviewDispl
                 Set<DataSource> dataSources = section.getDataSources();
                 for (DataSource dataSource :
                         dataSources) {
-                    for (CFLDataSourceEntry cflDataSourceEntry :
+                    for (DataSourceEntry dataSourceEntry :
                             dataSource.getDataSourceEntries()) {
-                        overviewDisplayItems.add(OverviewDisplayItem.createFromDataSource(cflDataSourceEntry));
+                        overviewDisplayItems.add(OverviewDisplayItem.createFromDataSource(dataSourceEntry));
                     }
                 }
             }

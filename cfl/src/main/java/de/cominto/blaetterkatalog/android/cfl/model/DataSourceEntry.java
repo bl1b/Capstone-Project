@@ -12,13 +12,13 @@ import java.io.File;
 import java.util.Date;
 
 /**
- * Interface CFLDataSourceEntry.
+ * Interface DataSourceEntry.
  * TODO: Add Description
  *
  * @author Jan Grünewald (2017)
  * @version 1.0.0
  */
-public interface CFLDataSourceEntry {
+public interface DataSourceEntry {
     File getOverviewIcon();
 
     String getIdentifier();

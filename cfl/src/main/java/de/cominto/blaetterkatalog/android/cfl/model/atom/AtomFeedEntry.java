@@ -6,9 +6,9 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
-import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
 import de.cominto.blaetterkatalog.android.util.DateUtil;
 import timber.log.Timber;
 
@@ -31,7 +30,7 @@ import timber.log.Timber;
  * @version 1.0.0
  */
 @Root(name = "entry", strict = false)
-public class AtomFeedEntry implements CFLDataSourceEntry {
+public class AtomFeedEntry implements DataSourceEntry {
     @Element(name = "id")
     private String id = "";
 

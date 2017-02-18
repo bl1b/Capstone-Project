@@ -27,7 +27,7 @@ public class DataSource implements CFLDataSourceEntryProvider {
         }
 
         @Override
-        public List<CFLDataSourceEntry> getDataSourceEntries() {
+        public List<DataSourceEntry> getDataSourceEntries() {
             return new ArrayList<>(0);
         }
     };
@@ -35,14 +35,14 @@ public class DataSource implements CFLDataSourceEntryProvider {
     private final String remoteUri;
     private final DataSourceType dataSourceType;
 
-    private final List<CFLDataSourceEntry> dataSourceEntries = new ArrayList<>();
+    private final List<DataSourceEntry> dataSourceEntries = new ArrayList<>();
 
     private DataSource(final String remoteUri, final DataSourceType dataSourceType) {
         this.remoteUri = remoteUri;
         this.dataSourceType = dataSourceType;
     }
 
-    public void addDataSourceEntry(CFLDataSourceEntry dataObjectFromRealm) {
+    public void addDataSourceEntry(DataSourceEntry dataObjectFromRealm) {
         dataSourceEntries.add(dataObjectFromRealm);
     }
 
@@ -75,7 +75,7 @@ public class DataSource implements CFLDataSourceEntryProvider {
     }
 
     @Override
-    public List<CFLDataSourceEntry> getDataSourceEntries() {
+    public List<DataSourceEntry> getDataSourceEntries() {
         return dataSourceEntries;
     }
 }

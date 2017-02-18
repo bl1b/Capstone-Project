@@ -10,7 +10,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import de.cominto.blaetterkatalog.android.cfl.CFLConfiguration;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeed;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeedRequester;
@@ -73,7 +73,7 @@ public class AtomService {
 
         realm.beginTransaction();
 
-        for (final CFLDataSourceEntry entry : atomFeed.getDataSourceEntries()) {
+        for (final DataSourceEntry entry : atomFeed.getDataSourceEntries()) {
 
             Timber.d("Parsed from uri '%s': '%s'.", dataSource.getRemoteUri(), entry.getIdentifier());
 

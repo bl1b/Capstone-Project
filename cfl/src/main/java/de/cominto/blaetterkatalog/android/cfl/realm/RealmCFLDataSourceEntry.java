@@ -6,7 +6,7 @@
 
 package de.cominto.blaetterkatalog.android.cfl.realm;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.util.ImgHelper;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -31,9 +31,9 @@ public class RealmCFLDataSourceEntry extends RealmObject {
     private String description;
     private String content;
 
-    public static CFLDataSourceEntry createDataObjectFromRealm(final RealmCFLDataSourceEntry realmCFLDataSourceEntry, final File imageStorageDir) {
+    public static DataSourceEntry createDataObjectFromRealm(final RealmCFLDataSourceEntry realmCFLDataSourceEntry, final File imageStorageDir) {
 
-        CFLDataSourceEntry cflDataSourceEntry = new CFLDataSourceEntry() {
+        DataSourceEntry dataSourceEntry = new DataSourceEntry() {
             @Override
             public File getOverviewIcon() {
                 String filename = ImgHelper.createImageFilename(getIdentifier(), "overview");
@@ -88,7 +88,7 @@ public class RealmCFLDataSourceEntry extends RealmObject {
             }
         };
 
-        return cflDataSourceEntry;
+        return dataSourceEntry;
     }
 
     public String getIdentifier() {

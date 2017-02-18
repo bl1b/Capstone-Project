@@ -7,9 +7,8 @@
 package de.cominto.blaetterkatalog.android.cfl.ui;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.text.Html;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
 
 import java.io.File;
@@ -41,11 +40,11 @@ public class OverviewDisplayItem {
         return item;
     }
 
-    public static OverviewDisplayItem createFromDataSource(CFLDataSourceEntry cflCFLDataSourceEntry) {
+    public static OverviewDisplayItem createFromDataSource(DataSourceEntry cflDataSourceEntry) {
         OverviewDisplayItem item = new OverviewDisplayItem(DisplayItemType.ELEMENT);
-        item.title = Html.fromHtml(cflCFLDataSourceEntry.getTitle()).toString();
-        item.description = cflCFLDataSourceEntry.getDescription();
-        item.imageFile = cflCFLDataSourceEntry.getDetailIcon();
+        item.title = Html.fromHtml(cflDataSourceEntry.getTitle()).toString();
+        item.description = cflDataSourceEntry.getDescription();
+        item.imageFile = cflDataSourceEntry.getDetailIcon();
         return item;
     }
 
