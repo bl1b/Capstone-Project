@@ -17,14 +17,14 @@ import timber.log.Timber;
 import java.io.File;
 
 /**
- * Class RealmCFLDataSource.
+ * Class RealmDataSource.
  * Data-Layer representation of a data-source (like Feed, YouTube-API,
  * Facebook-API, Twitter, API).
  *
  * @author Jan Grünewald (2017)
  * @version 1.0.0
  */
-public class RealmCFLDataSource extends RealmObject {
+public class RealmDataSource extends RealmObject {
     @PrimaryKey
     private String remoteUri;
 
@@ -44,16 +44,16 @@ public class RealmCFLDataSource extends RealmObject {
         return sourceEntries;
     }
 
-    public static DataSource createDataObjectFromRealm(final RealmCFLDataSource realmCFLDataSource, File imageStorageDir) {
+    public static DataSource createDataObjectFromRealm(final RealmDataSource realmDataSource, File imageStorageDir) {
         try {
-            DataSource source = new DataSource.Builder(realmCFLDataSource.getRemoteUri(), DataSourceType.valueOf(realmCFLDataSource.getType())).build();
+            DataSource source = new DataSource.Builder(realmDataSource.getRemoteUri(), DataSourceType.valueOf(realmDataSource.getType())).build();
             for (RealmDataSourceEntry realmDataSourceEntry :
-                    realmCFLDataSource.getSourceEntries()) {
+                    realmDataSource.getSourceEntries()) {
                 source.addDataSourceEntry(RealmDataSourceEntry.createDataObjectFromRealm(realmDataSourceEntry, imageStorageDir));
             }
             return source;
         } catch (IllegalArgumentException e) {
-            Timber.e(e, "Tried to create dataSourceType from illegal realmCFLDataSourceType: '" + realmCFLDataSource.getType() + "'.");
+            Timber.e(e, "Tried to create dataSourceType from illegal realmCFLDataSourceType: '" + realmDataSource.getType() + "'.");
             return DataSource.EMPTY;
         }
     }
@@ -73,8 +73,8 @@ public class RealmCFLDataSource extends RealmObject {
         return false;
     }
 
-    public static RealmCFLDataSource createRealmFromDataObject(final DataSource dataSource, final Realm realm) {
-        return realm.where(RealmCFLDataSource.class)
+    public static RealmDataSource createRealmFromDataObject(final DataSource dataSource, final Realm realm) {
+        return realm.where(RealmDataSource.class)
                 .equalTo("remoteUri", dataSource.getRemoteUri())
                 .findFirst();
     }

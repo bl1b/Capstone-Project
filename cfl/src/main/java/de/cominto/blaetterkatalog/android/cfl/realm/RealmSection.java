@@ -28,7 +28,7 @@ public class RealmSection extends RealmObject {
 
     private int nameStringRes;
 
-    private RealmList<RealmCFLDataSource> dataSources;
+    private RealmList<RealmDataSource> dataSources;
 
     public String getIdentifier() {
         return identifier;
@@ -54,11 +54,11 @@ public class RealmSection extends RealmObject {
         this.nameStringRes = nameStringRes;
     }
 
-    public RealmList<RealmCFLDataSource> getDataSources() {
+    public RealmList<RealmDataSource> getDataSources() {
         return dataSources;
     }
 
-    public void setDataSources(RealmList<RealmCFLDataSource> dataSources) {
+    public void setDataSources(RealmList<RealmDataSource> dataSources) {
         this.dataSources = dataSources;
     }
 
@@ -67,9 +67,9 @@ public class RealmSection extends RealmObject {
                 .withColorRes(realmSection.getColor())
                 .withIdentifier(realmSection.getIdentifier());
 
-        for (RealmCFLDataSource realmDataSource :
+        for (RealmDataSource realmDataSource :
                 realmSection.getDataSources()) {
-            builder.withDataSource(RealmCFLDataSource.createDataObjectFromRealm(realmDataSource, imageDir));
+            builder.withDataSource(RealmDataSource.createDataObjectFromRealm(realmDataSource, imageDir));
         }
 
         return builder.build();

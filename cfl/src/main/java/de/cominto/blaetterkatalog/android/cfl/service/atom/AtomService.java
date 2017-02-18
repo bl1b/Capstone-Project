@@ -14,7 +14,7 @@ import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeed;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeedRequester;
-import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.realm.RealmDataSource;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmDataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.util.ImgHelper;
@@ -69,7 +69,7 @@ public class AtomService {
         // download the overview image
         downloadImage(atomFeed.getIcon(), atomFeed.getId(), "overview");
 
-        final RealmCFLDataSource parentDataSource = RealmCFLDataSource.createRealmFromDataObject(dataSource, realm);
+        final RealmDataSource parentDataSource = RealmDataSource.createRealmFromDataObject(dataSource, realm);
 
         realm.beginTransaction();
 
@@ -142,9 +142,9 @@ public class AtomService {
 
             for (RealmSection matchingSection :
                     sections) {
-                for (RealmCFLDataSource dataSource :
+                for (RealmDataSource dataSource :
                         matchingSection.getDataSources()) {
-                    active.add(RealmCFLDataSource.createDataObjectFromRealm(dataSource, imageDir));
+                    active.add(RealmDataSource.createDataObjectFromRealm(dataSource, imageDir));
                 }
             }
         }
