@@ -37,7 +37,7 @@ public class CFLSection {
     /**
      * The data-sources that are grouped under this section.
      */
-    private final Set<CFLDataSource> dataSources = new LinkedHashSet<>();
+    private final Set<DataSource> dataSources = new LinkedHashSet<>();
 
     /**
      * The identifier that is used to identify this section.
@@ -70,7 +70,7 @@ public class CFLSection {
          * @param dataSource the data-source that should be added to this section.
          * @return the builder.
          */
-        public Builder withDataSource(CFLDataSource dataSource) {
+        public Builder withDataSource(DataSource dataSource) {
             newSection.dataSources.add(dataSource);
             return this;
         }
@@ -123,7 +123,7 @@ public class CFLSection {
         }
     }
 
-    public Set<CFLDataSource> getDataSources() {
+    public Set<DataSource> getDataSources() {
         return dataSources;
     }
 
@@ -145,7 +145,7 @@ public class CFLSection {
         jsonString += "\"nameStringRes\": " + getNameStringRes() + ", ";
         jsonString += "\"dataSources\": [";
 
-        for (CFLDataSource source : getDataSources()) {
+        for (DataSource source : getDataSources()) {
             jsonString += source.asJson() + ", ";
         }
 

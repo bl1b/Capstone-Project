@@ -6,7 +6,7 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @author Jan Grünewald (2016)
  * @version 1.0.0
  */
-public class AtomDataSource implements CFLDataSource {
+public class AtomDataSource implements DataSource {
 
     public static class Builder {
         private final AtomDataSource atomDataSource;

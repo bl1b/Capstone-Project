@@ -9,7 +9,7 @@ package de.cominto.blaetterkatalog.android.cfl.service.atom;
 import android.content.Context;
 import android.graphics.Bitmap;
 import de.cominto.blaetterkatalog.android.cfl.CFLConfiguration;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeed;
@@ -55,14 +55,14 @@ public class AtomService {
     }
 
     public void updateAllActive() {
-        Set<CFLDataSource> activeDataSources = getActiveDataSources();
-        for (CFLDataSource activeDataSource :
+        Set<DataSource> activeDataSources = getActiveDataSources();
+        for (DataSource activeDataSource :
                 activeDataSources) {
             updateDataSource(activeDataSource);
         }
     }
 
-    public void updateDataSource(CFLDataSource dataSource) {
+    public void updateDataSource(DataSource dataSource) {
         AtomFeedRequester request = new AtomFeedRequester(dataSource);
         final AtomFeed atomFeed = request.requestAtomFeedSynchronously();
 
@@ -127,8 +127,8 @@ public class AtomService {
         this.context = context;
     }
 
-    private Set<CFLDataSource> getActiveDataSources() {
-        Set<CFLDataSource> active = new HashSet<>();
+    private Set<DataSource> getActiveDataSources() {
+        Set<DataSource> active = new HashSet<>();
         String typeName = CFLDataSourceType.FEED_ATOM.name();
 
         for (String activeSectionId :

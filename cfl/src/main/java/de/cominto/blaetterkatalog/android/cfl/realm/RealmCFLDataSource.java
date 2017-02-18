@@ -6,7 +6,7 @@
 
 package de.cominto.blaetterkatalog.android.cfl.realm;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomDataSource;
 import io.realm.Realm;
@@ -44,17 +44,17 @@ public class RealmCFLDataSource extends RealmObject {
         return sourceEntries;
     }
 
-    public static CFLDataSource createDataObjectFromRealm(final RealmCFLDataSource realmCFLDataSource, File imageStorageDir) {
+    public static DataSource createDataObjectFromRealm(final RealmCFLDataSource realmCFLDataSource, File imageStorageDir) {
         switch (CFLDataSourceType.valueOf(realmCFLDataSource.getType())) {
             case FEED_ATOM:
-                CFLDataSource dataSource = new AtomDataSource(realmCFLDataSource.getRemoteUri());
+                DataSource dataSource = new AtomDataSource(realmCFLDataSource.getRemoteUri());
                 for (RealmCFLDataSourceEntry realmCFLDataSourceEntry :
                         realmCFLDataSource.getSourceEntries()) {
                     ((AtomDataSource) dataSource).addDataSourceEntry(RealmCFLDataSourceEntry.createDataObjectFromRealm(realmCFLDataSourceEntry, imageStorageDir));
                 }
                 return dataSource;
             default:
-                return CFLDataSource.EMPTY;
+                return DataSource.EMPTY;
         }
     }
 
@@ -73,7 +73,7 @@ public class RealmCFLDataSource extends RealmObject {
         return false;
     }
 
-    public static RealmCFLDataSource createRealmFromDataObject(final CFLDataSource dataSource, final Realm realm) {
+    public static RealmCFLDataSource createRealmFromDataObject(final DataSource dataSource, final Realm realm) {
         return realm.where(RealmCFLDataSource.class)
                 .equalTo("remoteUri", dataSource.getRemoteUri())
                 .findFirst();

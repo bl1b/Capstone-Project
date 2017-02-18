@@ -9,7 +9,7 @@ package de.cominto.blaetterkatalog.android.cfl.model.atom;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.util.OkHttpHelper;
 import okhttp3.Call;
 import okhttp3.OkHttpClient;
@@ -26,9 +26,9 @@ import timber.log.Timber;
  */
 public class AtomFeedRequester {
 
-    private final CFLDataSource dataSource;
+    private final DataSource dataSource;
 
-    public AtomFeedRequester(final CFLDataSource dataSource) {
+    public AtomFeedRequester(final DataSource dataSource) {
         this.dataSource = dataSource;
     }
 

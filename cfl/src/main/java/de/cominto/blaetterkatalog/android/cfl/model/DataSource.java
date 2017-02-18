@@ -12,15 +12,15 @@ import java.util.List;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
 
 /**
- * Interface CFLDataSource.
+ * Interface DataSource.
  * This interface describes a basic data source for the customer feed library.
  * It consists of an external URL where data is retrieved from.
  *
  * @author Jan Grünewald (2016)
  * @version 1.0.0
  */
-public interface CFLDataSource extends CFLDataSourceEntryProvider {
-    CFLDataSource EMPTY = new CFLDataSource() {
+public interface DataSource extends CFLDataSourceEntryProvider {
+    DataSource EMPTY = new DataSource() {
         @Override
         public String getRemoteUri() {
             return null;
