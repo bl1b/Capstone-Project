@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntryProvider;
 import de.cominto.blaetterkatalog.android.util.DateUtil;
 import timber.log.Timber;
 
@@ -28,7 +28,7 @@ import timber.log.Timber;
  * @version 1.0.0
  */
 @Root(name = "feed", strict = false)
-public class AtomFeed implements CFLDataSourceEntryProvider {
+public class AtomFeed implements DataSourceEntryProvider {
 
     @Element(name = "id")
     private String id;

@@ -6,8 +6,6 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model;
 
-import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,7 @@ import java.util.List;
  * @author Jan Grünewald (2016)
  * @version 1.0.0
  */
-public class DataSource implements CFLDataSourceEntryProvider {
+public class DataSource implements DataSourceEntryProvider {
     public static final DataSource EMPTY = new DataSource(null, DataSourceType.UNDEFINED) {
         @Override
         public String asJson() {

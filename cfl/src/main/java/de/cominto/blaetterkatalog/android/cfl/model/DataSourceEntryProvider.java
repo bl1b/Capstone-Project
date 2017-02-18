@@ -4,24 +4,22 @@
  * This project is licensed under NPOSL-3.0 (https://opensource.org/licenses/NPOSL-3.0).
  ******************************************************************************/
 
-package de.cominto.blaetterkatalog.android.cfl.service;
+package de.cominto.blaetterkatalog.android.cfl.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
-
 /**
- * Class CFLDataSourceEntryProvider.
+ * Class DataSourceEntryProvider.
  * TODO: Add Description
  *
  * @author Jan Grünewald (2017)
  * @version 1.0.0
  */
-public interface CFLDataSourceEntryProvider {
+public interface DataSourceEntryProvider {
     List<DataSourceEntry> getDataSourceEntries();
 
-    CFLDataSourceEntryProvider EMPTY = new CFLDataSourceEntryProvider() {
+    DataSourceEntryProvider EMPTY = new DataSourceEntryProvider() {
         @Override
         public List<DataSourceEntry> getDataSourceEntries() {
             return new ArrayList<>(0);
