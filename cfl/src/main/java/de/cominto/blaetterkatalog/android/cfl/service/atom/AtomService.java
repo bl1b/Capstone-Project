@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import de.cominto.blaetterkatalog.android.cfl.CFLConfiguration;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeed;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeedRequester;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLDataSource;
@@ -128,7 +129,7 @@ public class AtomService {
 
     private Set<CFLDataSource> getActiveDataSources() {
         Set<CFLDataSource> active = new HashSet<>();
-        String typeName = CFLDataSource.CFLDataSourceType.FEED_ATOM.name();
+        String typeName = CFLDataSourceType.FEED_ATOM.name();
 
         for (String activeSectionId :
                 configuration.getActiveSectionIds()) {

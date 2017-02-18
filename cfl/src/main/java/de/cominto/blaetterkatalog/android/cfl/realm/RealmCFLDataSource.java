@@ -7,6 +7,7 @@
 package de.cominto.blaetterkatalog.android.cfl.realm;
 
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomDataSource;
 import io.realm.Realm;
 import io.realm.RealmList;
@@ -44,7 +45,7 @@ public class RealmCFLDataSource extends RealmObject {
     }
 
     public static CFLDataSource createDataObjectFromRealm(final RealmCFLDataSource realmCFLDataSource, File imageStorageDir) {
-        switch (CFLDataSource.CFLDataSourceType.valueOf(realmCFLDataSource.getType())) {
+        switch (CFLDataSourceType.valueOf(realmCFLDataSource.getType())) {
             case FEED_ATOM:
                 CFLDataSource dataSource = new AtomDataSource(realmCFLDataSource.getRemoteUri());
                 for (RealmCFLDataSourceEntry realmCFLDataSourceEntry :

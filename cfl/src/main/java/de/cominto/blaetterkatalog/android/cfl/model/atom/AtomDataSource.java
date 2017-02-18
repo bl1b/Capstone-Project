@@ -8,6 +8,7 @@ package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
 
 import java.util.ArrayList;
 import java.util.List;
