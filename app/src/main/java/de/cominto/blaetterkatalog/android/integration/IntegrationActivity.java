@@ -11,7 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import de.cominto.blaetterkatalog.android.cfl.CFL;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
-import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
 
 /**
  * Class IntegrationActivity.
@@ -29,13 +30,11 @@ public class IntegrationActivity extends Activity {
         CFL customerFeedLibrary = new CFL.Builder(this)
                 .withSection(new CFLSection.Builder(R.string.section_name_theverge)
                         .withColorRes(R.color.section_color_technews)
-                        .withDataSource(new AtomDataSource.Builder("http://www.theverge.com/rss/index.xml")
+                        .withDataSource(new DataSource.Builder("http://www.theverge.com/rss/index.xml", DataSourceType.FEED_ATOM)
                                 .build())
                         .withIdentifier("the_verge_atom")
                         .build())
                 .build();
-
-//            .withDataSource(new AtomDataSource("https://news.google.de/?output=atom"))
 
         Intent libraryIntent = customerFeedLibrary.getOverviewIntent();
         libraryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

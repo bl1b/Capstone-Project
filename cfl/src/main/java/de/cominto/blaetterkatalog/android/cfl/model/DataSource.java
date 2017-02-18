@@ -6,10 +6,10 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model;
 
+import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
 
 /**
  * Interface DataSource.
@@ -19,18 +19,8 @@ import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider
  * @author Jan Grünewald (2016)
  * @version 1.0.0
  */
-public interface DataSource extends CFLDataSourceEntryProvider {
-    DataSource EMPTY = new DataSource() {
-        @Override
-        public String getRemoteUri() {
-            return null;
-        }
-
-        @Override
-        public DataSourceType getType() {
-            return DataSourceType.UNDEFINED;
-        }
-
+public class DataSource implements CFLDataSourceEntryProvider {
+    public static final DataSource EMPTY = new DataSource(null, DataSourceType.UNDEFINED) {
         @Override
         public String asJson() {
             return null;
@@ -42,10 +32,50 @@ public interface DataSource extends CFLDataSourceEntryProvider {
         }
     };
 
-    String getRemoteUri();
+    private final String remoteUri;
+    private final DataSourceType dataSourceType;
 
-    DataSourceType getType();
+    private final List<CFLDataSourceEntry> dataSourceEntries = new ArrayList<>();
 
-    String asJson();
+    private DataSource(final String remoteUri, final DataSourceType dataSourceType) {
+        this.remoteUri = remoteUri;
+        this.dataSourceType = dataSourceType;
+    }
 
+    public void addDataSourceEntry(CFLDataSourceEntry dataObjectFromRealm) {
+        dataSourceEntries.add(dataObjectFromRealm);
+    }
+
+    public static class Builder {
+        private final DataSource dataSource;
+
+        public Builder(final String remoteUri, final DataSourceType dataSourceType) {
+            dataSource = new DataSource(remoteUri, dataSourceType);
+        }
+
+        public DataSource build() {
+            return dataSource;
+        }
+    }
+
+    public String getRemoteUri() {
+        return remoteUri;
+    }
+
+    public DataSourceType getType() {
+        return dataSourceType;
+    }
+
+    public String asJson() {
+        String jsonString = "{ ";
+        jsonString += "\"remoteUri\": \"" + getRemoteUri() + "\", ";
+        jsonString += "\"type\": \"" + getType().name() + "\"";
+        jsonString += " }";
+        return jsonString;
+    }
+
+    @Override
+    public List<CFLDataSourceEntry> getDataSourceEntries() {
+        return dataSourceEntries;
+    }
 }
