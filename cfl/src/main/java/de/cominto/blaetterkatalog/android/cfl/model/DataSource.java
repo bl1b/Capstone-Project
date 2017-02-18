@@ -27,8 +27,8 @@ public interface DataSource extends CFLDataSourceEntryProvider {
         }
 
         @Override
-        public CFLDataSourceType getType() {
-            return CFLDataSourceType.UNDEFINED;
+        public DataSourceType getType() {
+            return DataSourceType.UNDEFINED;
         }
 
         @Override
@@ -44,7 +44,7 @@ public interface DataSource extends CFLDataSourceEntryProvider {
 
     String getRemoteUri();
 
-    CFLDataSourceType getType();
+    DataSourceType getType();
 
     String asJson();
 

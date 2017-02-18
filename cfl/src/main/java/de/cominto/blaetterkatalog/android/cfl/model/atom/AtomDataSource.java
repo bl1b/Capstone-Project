@@ -8,7 +8,7 @@ package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
 import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceType;
+import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +47,8 @@ public class AtomDataSource implements DataSource {
     }
 
     @Override
-    public CFLDataSourceType getType() {
-        return CFLDataSourceType.FEED_ATOM;
+    public DataSourceType getType() {
+        return DataSourceType.FEED_ATOM;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class AtomDataSource implements DataSource {
     public String asJson() {
         String jsonString = "{ ";
         jsonString += "\"remoteUri\": \"" + getRemoteUri() + "\", ";
-        jsonString += "\"type\": \"" + CFLDataSourceType.FEED_ATOM.name() + "\"";
+        jsonString += "\"type\": \"" + DataSourceType.FEED_ATOM.name() + "\"";
         jsonString += " }";
         return jsonString;
     }
