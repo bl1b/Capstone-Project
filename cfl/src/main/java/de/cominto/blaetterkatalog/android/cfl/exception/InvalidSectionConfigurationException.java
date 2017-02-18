@@ -8,7 +8,7 @@ package de.cominto.blaetterkatalog.android.cfl.exception;
 
 /**
  * Class InvalidSectionConfigurationException.
- * This exception will be thrown when the configuration for a CFLSection is
+ * This exception will be thrown when the configuration for a Section is
  * not correct.
  *
  * @author Jan Grünewald (2017)

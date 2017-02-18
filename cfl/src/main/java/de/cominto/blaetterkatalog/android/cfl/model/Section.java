@@ -17,15 +17,15 @@ import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.util.LogHelper;
 
 /**
- * Class CFLSection.
+ * Class Section.
  * TODO: Add Description
  *
  * @author Jan Grünewald (2017)
  * @version 1.0.0
  */
-public class CFLSection {
+public class Section {
 
-    private static final String TAG = LogHelper.TAG(CFLSection.class);
+    private static final String TAG = LogHelper.TAG(Section.class);
 
     /**
      * The color that will be shown as background-color for section headers.
@@ -47,14 +47,14 @@ public class CFLSection {
 
     public static class Builder {
 
-        private final CFLSection newSection;
+        private final Section newSection;
 
         public Builder(@StringRes int stringRes) {
-            newSection = new CFLSection(stringRes);
+            newSection = new Section(stringRes);
         }
 
         /**
-         * Initiates the CFLSection with the color from the color-resource
+         * Initiates the Section with the color from the color-resource
          * id that has been provided.
          *
          * @param colorRes the color-resource id
@@ -89,12 +89,12 @@ public class CFLSection {
             return this;
         }
 
-        public CFLSection build() {
+        public Section build() {
             return newSection;
         }
     }
 
-    private CFLSection(int nameStringRes) {
+    private Section(int nameStringRes) {
         this.nameStringRes = nameStringRes;
         color = 0;
         identifier = null;

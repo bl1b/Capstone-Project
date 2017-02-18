@@ -26,7 +26,7 @@ import de.cominto.blaetterkatalog.android.cfl.CFLConfiguration;
 import de.cominto.blaetterkatalog.android.cfl.R;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
+import de.cominto.blaetterkatalog.android.cfl.model.Section;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.OverviewDisplayItemProvider;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataChangedListener;
@@ -100,7 +100,7 @@ public class OverviewActivity extends AppCompatActivity implements OverviewDispl
             for (RealmSection realmSection :
                     realmSections) {
 
-                CFLSection section = RealmSection.createDataObjectFromRealm(realmSection, imageDir);
+                Section section = RealmSection.createDataObjectFromRealm(realmSection, imageDir);
 
                 overviewDisplayItems.add(OverviewDisplayItem.createFromSection(section, OverviewActivity.this));
                 Set<DataSource> dataSources = section.getDataSources();

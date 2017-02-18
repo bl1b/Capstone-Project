@@ -8,7 +8,7 @@ package de.cominto.blaetterkatalog.android.cfl.realm;
 
 import java.io.File;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
+import de.cominto.blaetterkatalog.android.cfl.model.Section;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -62,8 +62,8 @@ public class RealmSection extends RealmObject {
         this.dataSources = dataSources;
     }
 
-    public static CFLSection createDataObjectFromRealm(final RealmSection realmSection, File imageDir) {
-        CFLSection.Builder builder = new CFLSection.Builder(realmSection.getNameStringRes())
+    public static Section createDataObjectFromRealm(final RealmSection realmSection, File imageDir) {
+        Section.Builder builder = new Section.Builder(realmSection.getNameStringRes())
                 .withColorRes(realmSection.getColor())
                 .withIdentifier(realmSection.getIdentifier());
 

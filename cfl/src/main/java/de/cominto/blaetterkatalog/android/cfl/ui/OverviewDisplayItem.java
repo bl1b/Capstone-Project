@@ -9,7 +9,7 @@ package de.cominto.blaetterkatalog.android.cfl.ui;
 import android.content.Context;
 import android.text.Html;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
+import de.cominto.blaetterkatalog.android.cfl.model.Section;
 
 import java.io.File;
 
@@ -33,10 +33,10 @@ public class OverviewDisplayItem {
     private File imageFile;
     private int color;
 
-    public static OverviewDisplayItem createFromSection(CFLSection cflSection, Context context) {
+    public static OverviewDisplayItem createFromSection(Section section, Context context) {
         OverviewDisplayItem item = new OverviewDisplayItem(DisplayItemType.SECTION);
-        item.title = cflSection.getName(context);
-        item.color = cflSection.getColor();
+        item.title = section.getName(context);
+        item.color = section.getColor();
         return item;
     }
 

@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import de.cominto.blaetterkatalog.android.cfl.ioc.CFLComponent;
 import de.cominto.blaetterkatalog.android.cfl.ioc.CFLModule;
 import de.cominto.blaetterkatalog.android.cfl.ioc.DaggerCFLComponent;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
+import de.cominto.blaetterkatalog.android.cfl.model.Section;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.cfl.ui.OverviewActivity;
 import io.realm.Realm;
@@ -34,7 +34,7 @@ import io.realm.Realm;
 public class CFL {
 
     private final Context context;
-    private final Set<CFLSection> sections = new HashSet<>();
+    private final Set<Section> sections = new HashSet<>();
 
     public static class Builder {
         private final CFL cflInstance;
@@ -48,7 +48,7 @@ public class CFL {
             cflInstance = new CFL(context);
         }
 
-        public Builder withSection(CFLSection section) {
+        public Builder withSection(Section section) {
             cflInstance.sections.add(section);
             return this;
         }
@@ -72,7 +72,7 @@ public class CFL {
         }
 
         private void setupRealm() {
-            for (final CFLSection section : cflInstance.sections) {
+            for (final Section section : cflInstance.sections) {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {

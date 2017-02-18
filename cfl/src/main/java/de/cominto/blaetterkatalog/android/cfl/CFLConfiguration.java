@@ -12,7 +12,7 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 import java.util.Set;
 
-import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
+import de.cominto.blaetterkatalog.android.cfl.model.Section;
 
 /**
  * Class CFLConfiguration.
@@ -41,7 +41,7 @@ public class CFLConfiguration {
      */
     public static CFLConfiguration fromCleanStart(
             Context context,
-            Set<CFLSection> sections
+            Set<Section> sections
     ) {
         SharedPreferences prefs = context.getSharedPreferences(CFL_SHARED_PREF_IDENTIFIER, Context.MODE_PRIVATE);
         SharedPreferences.Editor prefEditor = prefs.edit();
@@ -79,9 +79,9 @@ public class CFLConfiguration {
         return activeSectionIds;
     }
 
-    private static void persistActiveSectionIdsToPreferences(Set<CFLSection> sections, SharedPreferences.Editor prefEditor, CFLConfiguration cflConfiguration) {
+    private static void persistActiveSectionIdsToPreferences(Set<Section> sections, SharedPreferences.Editor prefEditor, CFLConfiguration cflConfiguration) {
         Set<String> sectionIds = new HashSet<>();
-        for (CFLSection section : sections) {
+        for (Section section : sections) {
             sectionIds.add(section.getIdentifier());
         }
         prefEditor.putStringSet(CFL_SHARED_PREF_IDENTIFIER_SECTION_IDS, sectionIds);

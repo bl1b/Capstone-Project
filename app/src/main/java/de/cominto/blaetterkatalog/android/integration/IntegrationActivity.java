@@ -10,7 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import de.cominto.blaetterkatalog.android.cfl.CFL;
-import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
+import de.cominto.blaetterkatalog.android.cfl.model.Section;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
 
@@ -28,7 +28,7 @@ public class IntegrationActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         CFL customerFeedLibrary = new CFL.Builder(this)
-                .withSection(new CFLSection.Builder(R.string.section_name_theverge)
+                .withSection(new Section.Builder(R.string.section_name_theverge)
                         .withColorRes(R.color.section_color_technews)
                         .withDataSource(new DataSource.Builder("http://www.theverge.com/rss/index.xml", DataSourceType.FEED_ATOM)
                                 .build())
