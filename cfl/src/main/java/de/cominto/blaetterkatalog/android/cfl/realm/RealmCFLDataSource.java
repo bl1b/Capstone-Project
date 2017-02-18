@@ -30,7 +30,7 @@ public class RealmCFLDataSource extends RealmObject {
 
     private String type;
 
-    private RealmList<RealmCFLDataSourceEntry> sourceEntries;
+    private RealmList<RealmDataSourceEntry> sourceEntries;
 
     public String getRemoteUri() {
         return remoteUri;
@@ -40,16 +40,16 @@ public class RealmCFLDataSource extends RealmObject {
         return type;
     }
 
-    public RealmList<RealmCFLDataSourceEntry> getSourceEntries() {
+    public RealmList<RealmDataSourceEntry> getSourceEntries() {
         return sourceEntries;
     }
 
     public static DataSource createDataObjectFromRealm(final RealmCFLDataSource realmCFLDataSource, File imageStorageDir) {
         try {
             DataSource source = new DataSource.Builder(realmCFLDataSource.getRemoteUri(), DataSourceType.valueOf(realmCFLDataSource.getType())).build();
-            for (RealmCFLDataSourceEntry realmCFLDataSourceEntry :
+            for (RealmDataSourceEntry realmDataSourceEntry :
                     realmCFLDataSource.getSourceEntries()) {
-                source.addDataSourceEntry(RealmCFLDataSourceEntry.createDataObjectFromRealm(realmCFLDataSourceEntry, imageStorageDir));
+                source.addDataSourceEntry(RealmDataSourceEntry.createDataObjectFromRealm(realmDataSourceEntry, imageStorageDir));
             }
             return source;
         } catch (IllegalArgumentException e) {
@@ -63,7 +63,7 @@ public class RealmCFLDataSource extends RealmObject {
             return false;
         }
 
-        for (RealmCFLDataSourceEntry entry :
+        for (RealmDataSourceEntry entry :
                 getSourceEntries()) {
             if (entry.getIdentifier().equals(identifier)) {
                 return true;

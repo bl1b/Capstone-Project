@@ -15,14 +15,14 @@ import java.io.File;
 import java.util.Date;
 
 /**
- * Class RealmCFLDataSourceEntry.
+ * Class RealmDataSourceEntry.
  * This class represents the the persistence-layer for source-entries, like
  * Atom-Feeds, Facebook-Entries, Twitter-Tweets or YouTube-Videos.
  *
  * @author Jan Grünewald (2017)
  * @version 1.0.0
  */
-public class RealmCFLDataSourceEntry extends RealmObject {
+public class RealmDataSourceEntry extends RealmObject {
     @PrimaryKey
     private String identifier;
 
@@ -31,7 +31,7 @@ public class RealmCFLDataSourceEntry extends RealmObject {
     private String description;
     private String content;
 
-    public static DataSourceEntry createDataObjectFromRealm(final RealmCFLDataSourceEntry realmCFLDataSourceEntry, final File imageStorageDir) {
+    public static DataSourceEntry createDataObjectFromRealm(final RealmDataSourceEntry realmDataSourceEntry, final File imageStorageDir) {
 
         DataSourceEntry dataSourceEntry = new DataSourceEntry() {
             @Override
@@ -43,27 +43,27 @@ public class RealmCFLDataSourceEntry extends RealmObject {
 
             @Override
             public String getIdentifier() {
-                return realmCFLDataSourceEntry.getIdentifier();
+                return realmDataSourceEntry.getIdentifier();
             }
 
             @Override
             public Date getDate() {
-                return realmCFLDataSourceEntry.getDate();
+                return realmDataSourceEntry.getDate();
             }
 
             @Override
             public String getTitle() {
-                return realmCFLDataSourceEntry.getTitle();
+                return realmDataSourceEntry.getTitle();
             }
 
             @Override
             public String getDescription() {
-                return realmCFLDataSourceEntry.getDescription();
+                return realmDataSourceEntry.getDescription();
             }
 
             @Override
             public String getContent() {
-                return realmCFLDataSourceEntry.getContent();
+                return realmDataSourceEntry.getContent();
             }
 
             @Override

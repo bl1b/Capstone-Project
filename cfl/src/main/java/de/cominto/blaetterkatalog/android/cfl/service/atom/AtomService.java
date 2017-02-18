@@ -15,7 +15,7 @@ import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeed;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeedRequester;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLDataSource;
-import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.realm.RealmDataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.util.ImgHelper;
 import de.cominto.blaetterkatalog.android.util.PicassoHelper;
@@ -77,8 +77,8 @@ public class AtomService {
 
             Timber.d("Parsed from uri '%s': '%s'.", dataSource.getRemoteUri(), entry.getIdentifier());
 
-            RealmCFLDataSourceEntry updateOrInserted =
-                    realm.createOrUpdateObjectFromJson(RealmCFLDataSourceEntry.class, entry.asJson());
+            RealmDataSourceEntry updateOrInserted =
+                    realm.createOrUpdateObjectFromJson(RealmDataSourceEntry.class, entry.asJson());
 
             if (!parentDataSource.containsIdentifier(entry.getIdentifier())) {
                 parentDataSource.getSourceEntries().add(updateOrInserted);
