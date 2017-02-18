@@ -55,11 +55,6 @@ public class AtomDataSource implements CFLDataSource {
         return dataSourceEntries;
     }
 
-    public void setDataSourceEntries(List<CFLDataSourceEntry> dataSourceEntries) {
-        this.dataSourceEntries.clear();
-        this.dataSourceEntries.addAll(dataSourceEntries);
-    }
-
     public void addDataSourceEntry(CFLDataSourceEntry dataSourceEntry) {
         dataSourceEntries.add(dataSourceEntry);
     }
