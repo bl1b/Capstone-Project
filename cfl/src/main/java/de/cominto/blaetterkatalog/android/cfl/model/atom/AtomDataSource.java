@@ -6,11 +6,11 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
-import android.net.Uri;
-import android.os.Parcel;
-import android.os.Parcelable;
+import java.util.ArrayList;
+import java.util.List;
 
-import de.cominto.blaetterkatalog.android.cfl.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
 
 /**
  * Class AtomDataSource.
@@ -21,40 +21,51 @@ import de.cominto.blaetterkatalog.android.cfl.CFLDataSource;
  */
 public class AtomDataSource implements CFLDataSource {
 
-    private final String atomFeedUrl;
+    private final String remoteUri;
 
-    public static final Parcelable.Creator<AtomDataSource> CREATOR = new Parcelable.Creator<AtomDataSource>() {
-        @Override
-        public AtomDataSource createFromParcel(Parcel parcel) {
-            return new AtomDataSource(parcel);
-        }
+    private CFLDataSourceType type;
 
-        @Override
-        public AtomDataSource[] newArray(int i) {
-            return new AtomDataSource[i];
-        }
-    };
+    private final List<CFLDataSourceEntry> dataSourceEntries = new ArrayList<>();
 
-    public AtomDataSource(final String atomFeedUrl) {
-        this.atomFeedUrl = atomFeedUrl;
-    }
-
-    private AtomDataSource(final Parcel in) {
-        this.atomFeedUrl = in.readString();
+    public AtomDataSource(String remoteUri) {
+        this.remoteUri = remoteUri;
+        setType(CFLDataSourceType.FEED_ATOM);
     }
 
     @Override
-    public Uri getRemoteUri() {
-        return Uri.parse(atomFeedUrl);
+    public String getRemoteUri() {
+        return remoteUri;
+    }
+
+    public void setType(CFLDataSourceType type) {
+        this.type = type;
     }
 
     @Override
-    public int describeContents() {
-        return 0;
+    public CFLDataSourceType getType() {
+        return type;
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(atomFeedUrl);
+    public List<CFLDataSourceEntry> getDataSourceEntries() {
+        return dataSourceEntries;
+    }
+
+    public void setDataSourceEntries(List<CFLDataSourceEntry> dataSourceEntries) {
+        this.dataSourceEntries.clear();
+        this.dataSourceEntries.addAll(dataSourceEntries);
+    }
+
+    public void addDataSourceEntry(CFLDataSourceEntry dataSourceEntry) {
+        dataSourceEntries.add(dataSourceEntry);
+    }
+
+    @Override
+    public String asJson() {
+        String jsonString = "{ ";
+        jsonString += "\"remoteUri\": \"" + remoteUri + "\", ";
+        jsonString += "\"type\": \"" + type.name() + "\"";
+        jsonString += " }";
+        return jsonString;
     }
 }

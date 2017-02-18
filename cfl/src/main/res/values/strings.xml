@@ -2,4 +2,9 @@
     <string name="app_name">CFL</string>
     <string name="open_drawer">Opens the navigation drawer.</string>
     <string name="close_drawer">Closes the navigation drawer.</string>
+    <string name="menuitem_force_refresh">Reload</string>
+    <string name="overview_item_title_placeholder">Overview Item Title</string>
+    <string name="overview_item_image_description">An image describing the content of this article.</string>
+    <string name="overview_item_description_placeholder">This is just a placeholder text for the description of this article.</string>
+    <string name="overview_section_placeholder">This is a section</string>
 </resources>

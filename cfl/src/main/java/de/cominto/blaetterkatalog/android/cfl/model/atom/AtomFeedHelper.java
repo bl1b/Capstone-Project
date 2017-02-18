@@ -6,7 +6,10 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
@@ -21,7 +24,9 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 public class AtomFeedHelper {
 
     public static Retrofit retrofitWithBaseUrl(String baseUrl) {
+        baseUrl += baseUrl.endsWith("/") ? "" : "/";
         return new Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(createAtomConverterFactory())
                 .baseUrl(baseUrl)
                 .validateEagerly(true)
@@ -29,7 +34,10 @@ public class AtomFeedHelper {
     }
 
     public static Retrofit retrofitWithBaseUrl(HttpUrl baseUrl) {
+        String newLink = baseUrl.toString().endsWith("/") ? baseUrl.toString() : baseUrl.toString() + "/";
+        baseUrl = baseUrl.newBuilder(newLink).build();
         return new Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(createAtomConverterFactory())
                 .baseUrl(baseUrl)
                 .build();

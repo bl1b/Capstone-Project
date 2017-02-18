@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 
+repositories {
+    maven {
+        url 'https://github.com/uPhyca/stetho-realm/raw/master/maven-repo'
+    }
+}
 android {
+    publishNonDefault true
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -16,20 +22,24 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        warning 'InvalidPackage'
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
 
-    compile project(path: ':cfl')
+    debugCompile 'com.facebook.stetho:stetho:1.4.2'
+    debugCompile 'com.uphyca:stetho_realm:2.0.0'
+    debugCompile 'com.jakewharton.timber:timber:4.4.0'
 
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
-    testCompile 'junit:junit:4.12'
+    releaseCompile project(path: ':cfl', configuration: 'release')
+    debugCompile project(path: ':cfl', configuration: 'debug')
 }

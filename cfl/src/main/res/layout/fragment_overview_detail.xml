@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FF00CC00">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="#FF00CC00">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/overview_detail_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listItem="@layout/overview_item"/>
 </FrameLayout>

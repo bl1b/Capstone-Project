@@ -6,12 +6,22 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
+import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
+import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.util.DateUtil;
+import timber.log.Timber;
 
 /**
  * Class AtomFeedEntry.
@@ -21,7 +31,7 @@ import java.util.List;
  * @version 1.0.0
  */
 @Root(name = "entry", strict = false)
-public class AtomFeedEntry {
+public class AtomFeedEntry implements CFLDataSourceEntry {
     @Element(name = "id")
     private String id = "";
 
@@ -56,7 +66,7 @@ public class AtomFeedEntry {
         return id;
     }
 
-    public AtomFeedText getTitle() {
+    public AtomFeedText getOriginalTitle() {
         return title;
     }
 
@@ -68,7 +78,7 @@ public class AtomFeedEntry {
         return authors;
     }
 
-    public AtomFeedText getContent() {
+    public AtomFeedText getOriginalContent() {
         return content;
     }
 
@@ -90,5 +100,59 @@ public class AtomFeedEntry {
 
     public String getPublished() {
         return published;
+    }
+
+    @Override
+    public File getOverviewIcon() {
+        return null;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return getId();
+    }
+
+    @Override
+    public Date getDate() {
+        Date result = new Date();
+        try {
+            result = DateUtil.parseRFC3339Date(getUpdated());
+        } catch (ParseException e) {
+            Timber.e(e, "Failed parsing RFC 3339-Date from %s", getUpdated());
+            result = new Date();
+        }
+        return result;
+    }
+
+    @Override
+    public String getTitle() {
+        return getOriginalTitle().getText();
+    }
+
+    @Override
+    public String getDescription() {
+        return getSummary().getText();
+    }
+
+    @Override
+    public String getContent() {
+        return getOriginalContent().getText();
+    }
+
+    @Override
+    public File getDetailIcon() {
+        return null;
+    }
+
+    @Override
+    public String asJson() {
+        String jsonString = "{ ";
+        jsonString += "\"identifier\": \"" + getIdentifier() + "\", ";
+        jsonString += "\"date\": " + getDate().getTime() + ", ";
+        jsonString += "\"title\": \"" + TextUtils.htmlEncode(getTitle()) + "\", ";
+        jsonString += "\"description\": \"" + TextUtils.htmlEncode(getDescription()) + "\", ";
+        jsonString += "\"content\": \"" + TextUtils.htmlEncode(getContent()) + "\"";
+        jsonString += " }";
+        return jsonString;
     }
 }

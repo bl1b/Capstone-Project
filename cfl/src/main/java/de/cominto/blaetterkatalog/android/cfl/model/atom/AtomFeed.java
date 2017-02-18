@@ -6,11 +6,6 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
-import android.util.Log;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -20,7 +15,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+import de.cominto.blaetterkatalog.android.cfl.service.CFLDataSourceEntryProvider;
 import de.cominto.blaetterkatalog.android.util.DateUtil;
+import timber.log.Timber;
 
 /**
  * Class AtomFeed.
@@ -30,7 +28,7 @@ import de.cominto.blaetterkatalog.android.util.DateUtil;
  * @version 1.0.0
  */
 @Root(name = "feed", strict = false)
-public class AtomFeed {
+public class AtomFeed implements CFLDataSourceEntryProvider {
 
     @Element(name = "id")
     private String id;
@@ -82,7 +80,7 @@ public class AtomFeed {
         try {
             updatedDate = DateUtil.parseRFC3339Date(updated);
         } catch (ParseException e) {
-            Log.e("AtomFeedParser", "Failed parsing RFC 3339-Date from " + updated);
+            Timber.e(e, "Failed parsing RFC 3339-Date from %s", updated);
             updatedDate = new Date(System.currentTimeMillis());
         }
 
@@ -125,10 +123,10 @@ public class AtomFeed {
         return subtitle;
     }
 
-    public String asJSON() {
-        Gson gson = new GsonBuilder()
-                .create();
-
-        return gson.toJson(this);
+    @Override
+    public List<CFLDataSourceEntry> getDataSourceEntries() {
+        List<CFLDataSourceEntry> dataSourceEntries = new ArrayList<>(entries.size());
+        dataSourceEntries.addAll(entries);
+        return dataSourceEntries;
     }
 }

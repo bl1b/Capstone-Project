@@ -6,8 +6,9 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
-import retrofit2.Call;
+import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Interface AtomFeedService.
@@ -21,5 +22,8 @@ import retrofit2.http.GET;
  */
 public interface AtomFeedService {
     @GET("/")
-    Call<AtomFeed> fetchFeed();
+    Observable<AtomFeed> fetchFeed();
+
+    @GET("/{path}")
+    Observable<AtomFeed> fetchFeedWithAdditionalPath(@Path("path") String path);
 }

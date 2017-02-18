@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Company Feed Library</string>
     <string name="title_item_detail">Item Detail</string>
+
+    <string name="error_section_configration">Unable to show feed. Section configuration invalid.</string>
+    <string name="section_name_theverge">The Verge ATOM-Feed</string>
 </resources>
