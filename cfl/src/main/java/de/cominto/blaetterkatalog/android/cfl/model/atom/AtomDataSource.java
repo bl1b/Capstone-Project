@@ -6,11 +6,11 @@
 
 package de.cominto.blaetterkatalog.android.cfl.model.atom;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class AtomDataSource.
@@ -21,15 +21,23 @@ import de.cominto.blaetterkatalog.android.cfl.model.CFLDataSourceEntry;
  */
 public class AtomDataSource implements CFLDataSource {
 
+    public static class Builder {
+        private final AtomDataSource atomDataSource;
+
+        public Builder(final String remoteUri) {
+            atomDataSource = new AtomDataSource(remoteUri);
+        }
+
+        public AtomDataSource build() {
+            return atomDataSource;
+        }
+    }
+
     private final String remoteUri;
-
-    private CFLDataSourceType type;
-
     private final List<CFLDataSourceEntry> dataSourceEntries = new ArrayList<>();
 
-    public AtomDataSource(String remoteUri) {
+    private AtomDataSource(String remoteUri) {
         this.remoteUri = remoteUri;
-        setType(CFLDataSourceType.FEED_ATOM);
     }
 
     @Override
@@ -37,13 +45,9 @@ public class AtomDataSource implements CFLDataSource {
         return remoteUri;
     }
 
-    public void setType(CFLDataSourceType type) {
-        this.type = type;
-    }
-
     @Override
     public CFLDataSourceType getType() {
-        return type;
+        return CFLDataSourceType.FEED_ATOM;
     }
 
     @Override
@@ -64,7 +68,7 @@ public class AtomDataSource implements CFLDataSource {
     public String asJson() {
         String jsonString = "{ ";
         jsonString += "\"remoteUri\": \"" + remoteUri + "\", ";
-        jsonString += "\"type\": \"" + type.name() + "\"";
+        jsonString += "\"type\": \"" + CFLDataSourceType.FEED_ATOM.name() + "\"";
         jsonString += " }";
         return jsonString;
     }
