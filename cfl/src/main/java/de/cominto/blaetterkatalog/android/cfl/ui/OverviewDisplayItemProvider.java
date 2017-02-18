@@ -23,7 +23,7 @@
  *
  */
 
-package de.cominto.blaetterkatalog.android.cfl.model.atom;
+package de.cominto.blaetterkatalog.android.cfl.ui;
 
 import java.util.List;
 

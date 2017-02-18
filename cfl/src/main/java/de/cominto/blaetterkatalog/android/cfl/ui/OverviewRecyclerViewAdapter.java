@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import de.cominto.blaetterkatalog.android.cfl.R;
-import de.cominto.blaetterkatalog.android.cfl.model.atom.OverviewDisplayItemProvider;
 
 /**
  * Class OverviewRecyclerViewAdapter.

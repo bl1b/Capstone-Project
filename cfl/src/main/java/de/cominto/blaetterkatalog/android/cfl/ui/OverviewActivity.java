@@ -27,7 +27,6 @@ import de.cominto.blaetterkatalog.android.cfl.R;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.Section;
-import de.cominto.blaetterkatalog.android.cfl.model.atom.OverviewDisplayItemProvider;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataChangedListener;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataReceiver;
