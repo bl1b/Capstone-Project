@@ -18,11 +18,4 @@ import java.util.List;
  */
 public interface DataSourceEntryProvider {
     List<DataSourceEntry> getDataSourceEntries();
-
-    DataSourceEntryProvider EMPTY = new DataSourceEntryProvider() {
-        @Override
-        public List<DataSourceEntry> getDataSourceEntries() {
-            return new ArrayList<>(0);
-        }
-    };
 }
