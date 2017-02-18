@@ -16,7 +16,7 @@ import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeed;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.AtomFeedRequester;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLDataSource;
 import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLDataSourceEntry;
-import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLSection;
+import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.util.ImgHelper;
 import de.cominto.blaetterkatalog.android.util.PicassoHelper;
 import io.realm.Realm;
@@ -134,13 +134,13 @@ public class AtomService {
         for (String activeSectionId :
                 configuration.getActiveSectionIds()) {
 
-            RealmResults<RealmCFLSection> sections = realm
-                    .where(RealmCFLSection.class)
+            RealmResults<RealmSection> sections = realm
+                    .where(RealmSection.class)
                     .equalTo("identifier", activeSectionId)
                     .equalTo("dataSources.type", typeName)
                     .findAll();
 
-            for (RealmCFLSection matchingSection :
+            for (RealmSection matchingSection :
                     sections) {
                 for (RealmCFLDataSource dataSource :
                         matchingSection.getDataSources()) {

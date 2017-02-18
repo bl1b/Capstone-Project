@@ -28,7 +28,7 @@ import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
 import de.cominto.blaetterkatalog.android.cfl.model.DataSourceEntry;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
 import de.cominto.blaetterkatalog.android.cfl.model.atom.OverviewDisplayItemProvider;
-import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLSection;
+import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataChangedListener;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLDataReceiver;
 import de.cominto.blaetterkatalog.android.cfl.service.CFLUpdateService;
@@ -91,16 +91,16 @@ public class OverviewActivity extends AppCompatActivity implements OverviewDispl
             String[] activeSectionIds = new String[cflConfiguration.getActiveSectionIds().size()];
             cflConfiguration.getActiveSectionIds().toArray(activeSectionIds);
 
-            RealmResults<RealmCFLSection> realmCFLSections = realm.where(RealmCFLSection.class)
+            RealmResults<RealmSection> realmSections = realm.where(RealmSection.class)
                     .in("identifier", activeSectionIds)
                     .findAll();
 
             overviewDisplayItems.clear();
 
-            for (RealmCFLSection realmCflSection :
-                    realmCFLSections) {
+            for (RealmSection realmSection :
+                    realmSections) {
 
-                CFLSection section = RealmCFLSection.createDataObjectFromRealm(realmCflSection, imageDir);
+                CFLSection section = RealmSection.createDataObjectFromRealm(realmSection, imageDir);
 
                 overviewDisplayItems.add(OverviewDisplayItem.createFromSection(section, OverviewActivity.this));
                 Set<DataSource> dataSources = section.getDataSources();

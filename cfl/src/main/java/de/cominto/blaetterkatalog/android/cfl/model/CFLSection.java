@@ -13,6 +13,7 @@ import android.support.annotation.StringRes;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.util.LogHelper;
 
 /**
@@ -136,7 +137,7 @@ public class CFLSection {
      * to power the data-layer.
      *
      * @return the json-representation of this object.
-     * @see de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLSection
+     * @see RealmSection
      */
     public String asJson() {
         String jsonString = "{ ";

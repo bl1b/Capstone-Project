@@ -18,7 +18,7 @@ import de.cominto.blaetterkatalog.android.cfl.ioc.CFLComponent;
 import de.cominto.blaetterkatalog.android.cfl.ioc.CFLModule;
 import de.cominto.blaetterkatalog.android.cfl.ioc.DaggerCFLComponent;
 import de.cominto.blaetterkatalog.android.cfl.model.CFLSection;
-import de.cominto.blaetterkatalog.android.cfl.realm.RealmCFLSection;
+import de.cominto.blaetterkatalog.android.cfl.realm.RealmSection;
 import de.cominto.blaetterkatalog.android.cfl.ui.OverviewActivity;
 import io.realm.Realm;
 
@@ -76,7 +76,7 @@ public class CFL {
                 realm.executeTransaction(new Realm.Transaction() {
                     @Override
                     public void execute(Realm realm) {
-                        realm.createOrUpdateObjectFromJson(RealmCFLSection.class, section.asJson());
+                        realm.createOrUpdateObjectFromJson(RealmSection.class, section.asJson());
                     }
                 });
             }

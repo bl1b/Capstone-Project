@@ -14,13 +14,13 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
- * Class RealmCFLSection.
+ * Class RealmSection.
  * The database handler of a Section.
  *
  * @author Jan Grünewald (2017)
  * @version 1.0.0
  */
-public class RealmCFLSection extends RealmObject {
+public class RealmSection extends RealmObject {
     @PrimaryKey
     private String identifier;
 
@@ -62,13 +62,13 @@ public class RealmCFLSection extends RealmObject {
         this.dataSources = dataSources;
     }
 
-    public static CFLSection createDataObjectFromRealm(final RealmCFLSection realmCFLSection, File imageDir) {
-        CFLSection.Builder builder = new CFLSection.Builder(realmCFLSection.getNameStringRes())
-                .withColorRes(realmCFLSection.getColor())
-                .withIdentifier(realmCFLSection.getIdentifier());
+    public static CFLSection createDataObjectFromRealm(final RealmSection realmSection, File imageDir) {
+        CFLSection.Builder builder = new CFLSection.Builder(realmSection.getNameStringRes())
+                .withColorRes(realmSection.getColor())
+                .withIdentifier(realmSection.getIdentifier());
 
         for (RealmCFLDataSource realmDataSource :
-                realmCFLSection.getDataSources()) {
+                realmSection.getDataSources()) {
             builder.withDataSource(RealmCFLDataSource.createDataObjectFromRealm(realmDataSource, imageDir));
         }
 
