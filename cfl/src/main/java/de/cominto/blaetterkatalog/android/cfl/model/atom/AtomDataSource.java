@@ -62,7 +62,7 @@ public class AtomDataSource implements CFLDataSource {
     @Override
     public String asJson() {
         String jsonString = "{ ";
-        jsonString += "\"remoteUri\": \"" + remoteUri + "\", ";
+        jsonString += "\"remoteUri\": \"" + getRemoteUri() + "\", ";
         jsonString += "\"type\": \"" + CFLDataSourceType.FEED_ATOM.name() + "\"";
         jsonString += " }";
         return jsonString;
