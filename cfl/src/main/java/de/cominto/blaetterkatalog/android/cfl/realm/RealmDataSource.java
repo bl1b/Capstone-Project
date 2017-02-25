@@ -58,7 +58,7 @@ public class RealmDataSource extends RealmObject {
         }
     }
 
-    public boolean containsIdentifier(String identifier) {
+    public boolean hasEntryWithIdentifier(String identifier) {
         if (getSourceEntries() == null) {
             return false;
         }

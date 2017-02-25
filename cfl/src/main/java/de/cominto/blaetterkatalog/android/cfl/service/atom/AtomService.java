@@ -80,7 +80,7 @@ public class AtomService {
             RealmDataSourceEntry updateOrInserted =
                     realm.createOrUpdateObjectFromJson(RealmDataSourceEntry.class, entry.asJson());
 
-            if (!parentDataSource.containsIdentifier(entry.getIdentifier())) {
+            if (!parentDataSource.hasEntryWithIdentifier(entry.getIdentifier())) {
                 parentDataSource.getSourceEntries().add(updateOrInserted);
             }
 
