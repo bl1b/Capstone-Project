@@ -30,8 +30,27 @@ public class DataSource implements DataSourceEntryProvider {
         }
     };
 
+    public static class Builder {
+        private final DataSource dataSource;
+
+        public Builder(final String remoteUri, final DataSourceType dataSourceType) {
+            dataSource = new DataSource(remoteUri, dataSourceType);
+        }
+
+        public Builder withTextModifier(TextModifier modifier) {
+            dataSource.textModifiers.add(modifier);
+            return this;
+        }
+
+        public DataSource build() {
+            return dataSource;
+        }
+    }
+
     private final String remoteUri;
     private final DataSourceType dataSourceType;
+
+    private final List<TextModifier> textModifiers= new ArrayList<>();
 
     private final List<DataSourceEntry> dataSourceEntries = new ArrayList<>();
 
@@ -44,17 +63,6 @@ public class DataSource implements DataSourceEntryProvider {
         dataSourceEntries.add(dataObjectFromRealm);
     }
 
-    public static class Builder {
-        private final DataSource dataSource;
-
-        public Builder(final String remoteUri, final DataSourceType dataSourceType) {
-            dataSource = new DataSource(remoteUri, dataSourceType);
-        }
-
-        public DataSource build() {
-            return dataSource;
-        }
-    }
 
     public String getRemoteUri() {
         return remoteUri;

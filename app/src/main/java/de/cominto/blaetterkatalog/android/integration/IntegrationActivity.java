@@ -10,9 +10,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import de.cominto.blaetterkatalog.android.cfl.CFL;
-import de.cominto.blaetterkatalog.android.cfl.model.Section;
-import de.cominto.blaetterkatalog.android.cfl.model.DataSource;
-import de.cominto.blaetterkatalog.android.cfl.model.DataSourceType;
+import de.cominto.blaetterkatalog.android.cfl.model.*;
 
 /**
  * Class IntegrationActivity.
@@ -31,6 +29,7 @@ public class IntegrationActivity extends Activity {
                 .withSection(new Section.Builder(R.string.section_name_theverge)
                         .withColorRes(R.color.section_color_technews)
                         .withDataSource(new DataSource.Builder("http://www.theverge.com/rss/index.xml", DataSourceType.FEED_ATOM)
+                                .withTextModifier(new ImageTagRemovalModifier(TextModifier.Type.CONTENT_MODIFIER))
                                 .build())
                         .withIdentifier("the_verge_atom")
                         .build())
